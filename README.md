@@ -4,12 +4,12 @@ Sample app that shows the basic usage of [RxJava](https://github.com/ReactiveX/R
 All coded in [Kotlin](https://kotlinlang.org/).
 
 ## RxJava
-* [zip] (src/test/java/com/lappsus/rxretrorealm/RxZipTests.kt)
-* [flatMap] (src/test/java/com/lappsus/rxretrorealm/RxFlatMapTests.kt)
-* [switch] (src/test/java/com/lappsus/rxretrorealm/RxSwitchTests.kt)
-* [reduce] (src/test/java/com/lappsus/rxretrorealm/RxReduceTests.kt)
-* [Error handling] (src/test/java/com/lappsus/rxretrorealm/RxErrorTests.kt)
+* [zip] (app/src/test/java/com/lappsus/rxretrorealm/RxZipTests.kt)
+* [flatMap] (app/src/test/java/com/lappsus/rxretrorealm/RxFlatMapTests.kt)
+* [switch] (app/src/test/java/com/lappsus/rxretrorealm/RxSwitchTests.kt)
+* [reduce] (app/src/test/java/com/lappsus/rxretrorealm/RxReduceTests.kt)
+* [Error handling] (app/src/test/java/com/lappsus/rxretrorealm/RxErrorTests.kt)
 
 ## Kotlin
-* [Collections] (src/test/java/com/lappsus/rxretrorealm/KotlinTests.kt)
+* [Collections] (app/src/test/java/com/lappsus/rxretrorealm/KotlinTests.kt)
 

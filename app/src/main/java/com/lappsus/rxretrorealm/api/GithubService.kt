@@ -4,8 +4,8 @@ package com.lappsus.rxretrorealm.api
 import com.lappsus.rxretrorealm.model.Gist
 import com.lappsus.rxretrorealm.model.Subscription
 import com.lappsus.rxretrorealm.model.User
-import retrofit.http.GET
-import retrofit.http.Path
+import retrofit2.http.GET
+import retrofit2.http.Path
 import rx.Observable
 import java.util.*
 

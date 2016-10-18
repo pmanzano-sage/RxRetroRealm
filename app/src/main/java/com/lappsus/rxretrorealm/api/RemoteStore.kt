@@ -11,9 +11,9 @@ import com.lappsus.rxretrorealm.model.Gist
 import com.lappsus.rxretrorealm.model.Subscription
 import com.lappsus.rxretrorealm.model.User
 import io.realm.RealmObject
-import retrofit.GsonConverterFactory
-import retrofit.Retrofit
-import retrofit.RxJavaCallAdapterFactory
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -33,13 +33,13 @@ val gson = GsonBuilder().setExclusionStrategies(object : ExclusionStrategy {
     }
 }).create()
 
-val retrofit2: Retrofit = Retrofit.Builder()
+val retrofit: Retrofit = Retrofit.Builder()
         .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
         .addConverterFactory(GsonConverterFactory.create(gson))
         .baseUrl("https://api.github.com/")
         .build()
 
-val githubService: GithubService = retrofit2.create(GithubService::class.java)
+val githubService: GithubService = retrofit.create(GithubService::class.java)
 
 
 fun retrieveGithubUser(username: String): Observable<User> {

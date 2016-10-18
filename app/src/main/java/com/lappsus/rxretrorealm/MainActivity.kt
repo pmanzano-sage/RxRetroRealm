@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.lappsus.android.rxretrorealm.R
 import com.lappsus.rxretrorealm.api.retrieveFollowingDetails
@@ -48,6 +49,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun onRequestError(error: Throwable) {
         Log.e("Error", error.message)
+        Toast.makeText(this, error.message, Toast.LENGTH_SHORT).show()
     }
 
     private fun updateFollowingList(users: List<User>) {

@@ -3,7 +3,7 @@
 Sample app that shows the basic usage of [RxJava](https://github.com/ReactiveX/RxJava), [Retrofit] (https://square.github.io/retrofit/) and [Realm](https://github.com/realm/realm-java). 
 All coded in [Kotlin](https://kotlinlang.org/).
 
-![Screenshot](app/src/main/resources/screenshot.png =200x)
+<img src="app/src/main/resources/screenshot.png" alt="Screenshot" style="width: 200px;"/>
 
 ## RxJava
 * [zip] (app/src/test/java/com/lappsus/rxretrorealm/RxZipTests.kt)

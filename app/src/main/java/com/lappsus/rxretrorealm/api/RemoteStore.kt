@@ -99,5 +99,19 @@ fun retrieveGithubFollowings(theUser: User): Observable<ArrayList<User>> {
 }
 
 
+/**
+ * Look how buffer can be used to rebuild the list.
+ */
+fun retrieveFollowingDetails(theUser: User): Observable<List<User>> {
+    val username = theUser.login!!
+    val numFollowing = theUser.following
+    return retrieveFollowingUsers(username)
+            .doOnNext { users -> theUser.setFollowingUsers(users) }
+            .flatMap { Observable.from(it) }
+            .flatMap { retrieveGithubUser(it.login!!) }
+            .doOnNext { saveUser(it) }
+            .buffer(numFollowing)
+}
+
 
 

@@ -17,6 +17,7 @@ import java.util.*
 val realm = Realm.getDefaultInstance()
 
 fun saveUser(user: User): User {
+    Log.d(TAG, "Saving ${user.toStr()}")
     realm.beginTransaction()
     realm.copyToRealmOrUpdate(user)
     realm.commitTransaction()
@@ -68,6 +69,10 @@ fun User.setFollowingUsers(users: ArrayList<User>): User {
 
 fun getCurrentUser(): User? {
     return RealmQuery.createQuery(realm, User::class.java).findFirst()
+}
+
+fun User.toStr(): String {
+    return "$login $followers $following $createdAt"
 }
 
 fun Subscription.toStr(): String {

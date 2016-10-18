@@ -1,3 +1,4 @@
 <resources>
-  <string name="app_name">RxRetroRealm</string>
+    <string name="app_name">RxRetroRealm</string>
+    <string name="following">Following</string>
 </resources>

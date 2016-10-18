@@ -1,13 +1,11 @@
 package com.lappsus.rxretrorealm
 
-import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import com.bumptech.glide.Glide
 import com.lappsus.android.rxretrorealm.R
-import com.lappsus.android.rxretrorealm.databinding.ActivityMainBinding
 import com.lappsus.rxretrorealm.api.retrieveFollowingDetails
 import com.lappsus.rxretrorealm.api.retrieveGithubGuy
 import com.lappsus.rxretrorealm.db.getCurrentUser
@@ -18,37 +16,35 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        setContentView(R.layout.activity_main)
 
         followingList.layoutManager = LinearLayoutManager(this)
 
         val savedUser = getCurrentUser()
 
-        updateView(binding, savedUser)
+        updateView(savedUser)
 
         retrieveGithubGuy("pmanzano-sage")
                 .subscribe(
-                        { user ->
-                            updateView(binding, user)
-                            retrieveFollowingDetails(user)
-                                    .subscribe(
-                                            { users ->
-                                                Log.d("Success", "Following ${users.size} people")
-                                                updateFollowingList(users)
-                                            },
-                                            { error ->
-                                                Log.e("Error", error.message)
-                                            }
-                                    )
-
-                        },
-                        { error ->
-                            Log.e("Error", error.message)
-                        }
+                        { onRetrieveGuySuccess(it) },
+                        { onRequestError(it) }
                 )
+    }
 
+    private fun onRetrieveGuySuccess(user: User) {
+        updateView(user)
+        retrieveFollowingDetails(user)
+                .subscribe(
+                        { users ->
+                            Log.d("Success", "Following ${users.size} people")
+                            updateFollowingList(users)
+                        },
+                        { onRequestError(it) }
+                )
+    }
 
+    private fun onRequestError(error: Throwable) {
+        Log.e("Error", error.message)
     }
 
     private fun updateFollowingList(users: List<User>) {
@@ -64,10 +60,10 @@ class MainActivity : AppCompatActivity() {
         followingList.adapter = adapter
     }
 
-    private fun updateView(binding: ActivityMainBinding, savedUser: User?) {
-        Glide.with(this).load(savedUser?.avatarUrl).into(binding.userImage)
-        binding.userName.text = savedUser?.name
-        binding.publicRepos.text = "Public Repos: " + savedUser?.publicRepos.toString()
+    private fun updateView(savedUser: User?) {
+        Glide.with(this).load(savedUser?.avatarUrl).into(userImage)
+        userName.text = savedUser?.name
+        publicRepos.text = "Public Repos: " + savedUser?.publicRepos.toString()
     }
 }
 

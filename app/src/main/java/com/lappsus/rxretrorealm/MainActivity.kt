@@ -21,14 +21,17 @@ class MainActivity : AppCompatActivity() {
         followingList.layoutManager = LinearLayoutManager(this)
 
         val savedUser = getCurrentUser()
-
         updateView(savedUser)
+        retrieveGuy("pmanzano-sage")
+    }
 
-        retrieveGithubGuy("pmanzano-sage")
+    private fun retrieveGuy(login: String) {
+        retrieveGithubGuy(login)
                 .subscribe(
                         { onRetrieveGuySuccess(it) },
                         { onRequestError(it) }
                 )
+
     }
 
     private fun onRetrieveGuySuccess(user: User) {
@@ -51,6 +54,7 @@ class MainActivity : AppCompatActivity() {
         val adapter = FollowingListAdapter(users,
                 {
                     Log.d("onClick", "${it.login}")
+                    retrieveGuy("${it.login}")
                 },
                 {
                     Log.d("onLongClick", "${it.login}")

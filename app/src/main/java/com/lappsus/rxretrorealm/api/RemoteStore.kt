@@ -92,8 +92,7 @@ fun retrieveFollowingUsers(username: String): Observable<ArrayList<User>> {
  */
 fun retrieveGithubFollowings(theUser: User): Observable<ArrayList<User>> {
     val username = theUser.login!!
-    val userReq = retrieveGithubUser(username)
-    return Observable.just(userReq)
+    return retrieveGithubUser(username)
             .flatMap { retrieveFollowingUsers(username) }
             .doOnNext { users -> theUser.setFollowingUsers(users) }
 }

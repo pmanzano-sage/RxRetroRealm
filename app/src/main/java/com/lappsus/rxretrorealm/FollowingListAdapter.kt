@@ -22,14 +22,14 @@ class FollowingListAdapter(val followingUsers: List<User>, val itemClick: (User)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindForecast(followingUsers[position])
+        holder.bindUser(followingUsers[position])
     }
 
     override fun getItemCount() = followingUsers.size
 
     class ViewHolder(view: View, val itemClick: (User) -> Unit, val itemLongClick: (User) -> Boolean) : RecyclerView.ViewHolder(view) {
 
-        fun bindForecast(user: User) {
+        fun bindUser(user: User) {
             with(user) {
                 Glide.with(itemView.ctx).load(user.avatarUrl).into(itemView.icon)
                 itemView.username.text = user.login

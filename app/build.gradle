@@ -43,6 +43,7 @@ dependencies {
 
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
     //Realm
     compile 'io.realm:realm-android:0.87.4'

@@ -3,6 +3,7 @@ package com.lappsus.rxretrorealm
 import org.junit.Test
 import rx.Observable
 import java.util.*
+import kotlin.reflect.memberProperties
 
 
 /**
@@ -21,13 +22,29 @@ class RxSwitchTests {
         }
     }
 
+    inner class User(val name: String, var age: Int?) {
+        override fun toString(): String {
+            return "$name:$age"
+        }
+    }
+
+    @Test
+    fun testReflection() {
+        println("--- Reflection begin ---")
+        val user = User("Bob", 25)
+        User::class.memberProperties.forEach { prop -> println("${prop.name} = ${prop.get(user)}") }
+        println("--- Reflection end ---")
+    }
+
     /**
      * If the initial observable is empty, we emit a "default" value Person{name='Neil', age=0}
      */
     @Test
     fun testSwitchEmpty1() {
-        Observable.just(ArrayList<Person>())
-                .flatMap { persons -> Observable.from(persons).switchIfEmpty(Observable.just(Person("Neil", 0))) }
+        val list = arrayListOf(Person("1", 1), Person("2", 2))
+        val listUsers = arrayListOf(User("U", 1), User("U", 2))
+        Observable.just(list, listUsers)
+                .flatMap { persons -> Observable.from(persons).switchIfEmpty(Observable.just(Person("Opps", 0))) }
                 .subscribe(::println)
     }
 

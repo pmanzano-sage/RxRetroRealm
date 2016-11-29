@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import io.realm.RealmList
 import io.realm.RealmObject
+import io.realm.annotations.Ignore
 import io.realm.annotations.PrimaryKey
 import io.realm.annotations.RealmClass
 import java.util.*
@@ -53,6 +54,11 @@ open class User : RealmObject() {
     open var gists: RealmList<Gist> = RealmList()
     open var followingUsers: RealmList<User> = RealmList()
 
+    // Example of ignored value for Realm
+    @Ignore
+    open var ignoreIt: String = ""
+
+    // Example of calculated value
     fun importance(): Int {
         return publicRepos + followers + following
     }

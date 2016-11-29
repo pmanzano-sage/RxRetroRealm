@@ -69,7 +69,13 @@ class MainActivity : AppCompatActivity() {
     private fun updateView(savedUser: User?) {
         Glide.with(this).load(savedUser?.avatarUrl).into(userImage)
         userName.text = savedUser?.name
+        Log.d(TAG, "Importance = ${savedUser?.importance()}")
+
         publicRepos.text = "Public Repos: " + savedUser?.publicRepos.toString()
+    }
+
+    private companion object {
+        val TAG = "MainActivity"
     }
 }
 

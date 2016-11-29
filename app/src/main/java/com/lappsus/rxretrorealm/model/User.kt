@@ -52,5 +52,9 @@ open class User : RealmObject() {
     open var subscriptions: RealmList<Subscription> = RealmList()
     open var gists: RealmList<Gist> = RealmList()
     open var followingUsers: RealmList<User> = RealmList()
+
+    fun importance(): Int {
+        return publicRepos + followers + following
+    }
 }
 
